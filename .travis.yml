@@ -1,0 +1,11 @@
+language: csharp
+solution: Eventure.sln
+mono: none
+dotnet: 2.0.3
+dist: trusty
+before_script:
+    - npm install -g bower
+script:
+   - dotnet restore
+   - dotnet build
+   - dotnet test Eventure.EventStore.Ef.Npgsql.Test/Eventure.EventStore.Ef.Npgsql.Test.csproj
