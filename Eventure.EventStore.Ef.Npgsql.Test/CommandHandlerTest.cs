@@ -17,21 +17,19 @@ namespace Eventure.EventStore.Ef.Npgsql.Test
 {
     public class CommandHandlerTest
     {
-        private readonly EventDbContext _context;
         private readonly ServiceProvider _provider;
 
         public CommandHandlerTest()
         {
             var builder = new DbContextOptionsBuilder<EventDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new EventDbContext(builder.Options);
-            _context = context;
-            
+
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient<ICommandDispatcher, CommandDispatcher>();
             serviceCollection.RegisterAggregateFactory<TestAggregate, TestAggregateFactory>();
             serviceCollection.AddTransient<IEventDataFactory<EventData, Guid, Guid>, EventDataFactory>();
             serviceCollection.RegisterCommandHandler<TestCommand, TestCommandHandlerFactory>();
-            serviceCollection.AddSingleton<EventDbContext<EventData, Guid, Guid>>(_context);
+            serviceCollection.AddSingleton<EventDbContext<EventData, Guid, Guid>>(context);
             serviceCollection.AddScoped<IEventStore<EventData, Guid, Guid>, EventStore.EventStore>();
             _provider = serviceCollection.BuildServiceProvider();
         }

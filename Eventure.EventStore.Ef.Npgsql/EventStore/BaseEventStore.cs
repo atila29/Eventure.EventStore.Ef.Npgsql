@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BinaryFormatter;
 using Eventure.Domain.Aggregate;
 using Eventure.Domain.DomainEvents;
 using Eventure.Domain.Extensions;
@@ -56,14 +55,12 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
 
         public IEnumerable<IEvent<TEventId, TAggregateId>> GetAllEvents()
         {
-            var converter = new BinaryConverter();
             return DbContext.Events
                 .Select(@event => EventureSerializer.Deserialize<IEvent<TEventId, TAggregateId>>(@event.Data));
         }
 
         public IEnumerable<IEvent<TEventId, TAggregateId>> GetEventsByAggregateId(TAggregateId id)
         {
-            var converter = new BinaryConverter();
             var events = DbContext.Events
                 .Where(@event => @event.AggregateId.Equals(id))
                 .Select(@event => EventureSerializer.Deserialize<IEvent<TEventId, TAggregateId>>(@event.Data));

@@ -1,5 +1,4 @@
 ﻿using System;
-using BinaryFormatter;
 using Eventure.Domain.DomainEvents;
 using Eventure.EventStore.Ef.Npgsql.Utility;
 
@@ -9,7 +8,6 @@ namespace Eventure.EventStore.Ef.Npgsql.Model.Factory
     {
         public EventData Create(IEvent<Guid, Guid> @event)
         {
-            var converter = new BinaryConverter();
 
             var createdEvent = new EventData
             {

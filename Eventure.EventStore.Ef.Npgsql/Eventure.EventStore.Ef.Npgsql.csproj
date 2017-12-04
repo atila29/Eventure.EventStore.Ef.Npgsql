@@ -1,9 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Mathias Petersen</Authors>
+    <Version>1.0.0-alpha</Version>
+    <Description>Eventstore for Eventure, with EntityFrameworkCore Npgsql.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>initial</PackageReleaseNotes>
+    <PackageTags>EventStore Eventure</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BinaryFormatter" Version="2.1.0" />
     <PackageReference Include="Eventure" Version="1.2.1-alpha" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
