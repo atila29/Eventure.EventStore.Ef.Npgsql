@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mathias Petersen</Authors>
-    <Version>1.0.0-alpha</Version>
+    <Version>1.1.0-alpha</Version>
     <Description>Eventstore for Eventure, with EntityFrameworkCore Npgsql.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>initial</PackageReleaseNotes>
+    <PackageReleaseNotes>Opiniated BaseCommandHandler</PackageReleaseNotes>
     <PackageTags>EventStore Eventure</PackageTags>
   </PropertyGroup>
   <ItemGroup>

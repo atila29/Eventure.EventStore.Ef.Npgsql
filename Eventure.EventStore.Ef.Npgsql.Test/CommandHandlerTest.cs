@@ -48,6 +48,7 @@ namespace Eventure.EventStore.Ef.Npgsql.Test
 
             // Assert
             Assert.NotNull(aggregate);
+            Assert.IsType<TestAggregate>(aggregate);
             Assert.Equal(1, aggregate.Version);
             Assert.Equal(command.AggregateId, aggregate.Id);
         }
