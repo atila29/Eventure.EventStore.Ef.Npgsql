@@ -2,14 +2,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mathias Petersen</Authors>
-    <Version>1.1.0-alpha</Version>
+    <Version>1.3.0-alpha</Version>
     <Description>Eventstore for Eventure, with EntityFrameworkCore Npgsql.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Opiniated BaseCommandHandler</PackageReleaseNotes>
+    <PackageReleaseNotes>Update to Eventure 1.3.0</PackageReleaseNotes>
     <PackageTags>EventStore Eventure</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Eventure" Version="1.2.1-alpha" />
+    <PackageReference Include="Eventure" Version="1.3.0-alpha" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" />

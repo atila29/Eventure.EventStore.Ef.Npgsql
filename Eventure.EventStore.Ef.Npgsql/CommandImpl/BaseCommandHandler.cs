@@ -24,8 +24,8 @@ namespace Eventure.EventStore.Ef.Npgsql.CommandImpl
     {
         protected readonly IEventStore<TEventData, TEventId, TAggregateId> EventStore;
 
-        protected abstract IEvent<TEventId, TAggregateId> CreateEvent(int version);
-        protected abstract TAggregateId GetAggregateId();
+        protected abstract IEvent<TEventId, TAggregateId> CreateEvent(int version, TCommand command);
+        protected abstract TAggregateId GetAggregateId(TCommand command);
 
         protected delegate Task AfterExecuteTaskDelegate(IEvent<TEventId, TAggregateId> @event);
         protected event AfterExecuteTaskDelegate AfterExecuteEvent;
@@ -36,24 +36,23 @@ namespace Eventure.EventStore.Ef.Npgsql.CommandImpl
             EventStore = eventStore;
         }
 
-
-        public async Task ExecuteAsync()
-        {
-            var aggregateId = GetAggregateId();
-            var version = await EventStore.GetAggregateVersionAsync(aggregateId);
-            var @event = CreateEvent(version);
-
-            await EventStore.AddEventAsync(@event);
-
-            await OnAfterExecuteAsync(@event);
-        }
-
         protected virtual async Task OnAfterExecuteAsync(IEvent<TEventId, TAggregateId> @event)
         {
             await Task.Run(async () =>
             {
                 if (AfterExecuteEvent != null) await AfterExecuteEvent.Invoke(@event); 
             });
+        }
+
+        public async Task ExecuteAsync(TCommand command)
+        {
+            var aggregateId = GetAggregateId(command);
+            var version = await EventStore.GetAggregateVersionAsync(aggregateId);
+            var @event = CreateEvent(version, command);
+
+            await EventStore.AddEventAsync(@event);
+
+            await OnAfterExecuteAsync(@event);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Eventure.EventStore.Ef.Npgsql.Test
             serviceCollection.AddTransient<ICommandDispatcher, CommandDispatcher>();
             serviceCollection.RegisterAggregateFactory<TestAggregate, TestAggregateFactory>();
             serviceCollection.AddTransient<IEventDataFactory<EventData, Guid, Guid>, EventDataFactory>();
-            serviceCollection.RegisterCommandHandler<TestCommand, TestCommandHandlerFactory>();
+            serviceCollection.RegisterCommandHandler<TestCommand, TestCommandHandler>();
             serviceCollection.AddSingleton<EventDbContext<EventData, Guid, Guid>>(context);
             serviceCollection.AddScoped<IEventStore<EventData, Guid, Guid>, EventStore.EventStore>();
             _provider = serviceCollection.BuildServiceProvider();
