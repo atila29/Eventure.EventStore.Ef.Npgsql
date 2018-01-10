@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mathias Petersen</Authors>
-    <Version>1.4.0-alpha</Version>
+    <Version>1.4.1-alpha</Version>
     <Description>Eventstore for Eventure, with EntityFrameworkCore Npgsql.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Add IdsAsQuery feature</PackageReleaseNotes>
+    <PackageReleaseNotes>remove IdsAsQuery</PackageReleaseNotes>
     <PackageTags>EventStore Eventure</PackageTags>
   </PropertyGroup>
   <ItemGroup>

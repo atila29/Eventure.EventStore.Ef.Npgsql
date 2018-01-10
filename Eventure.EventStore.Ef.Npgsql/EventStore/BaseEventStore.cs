@@ -70,9 +70,5 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
         public Task<int> GetAggregateVersionAsync(TAggregateId id) => 
             DbContext.Events.CountAsync(@event => @event.AggregateId.Equals(id));
 
-        public IQueryable<TAggregateId> IdsAsQueryable<TAggregate>() =>
-            DbContext.Events
-                .Where(data => data.Version == 0 && data.EventType == typeof(TAggregate).FullName)
-                .Select(data => data.AggregateId);
     }
 }

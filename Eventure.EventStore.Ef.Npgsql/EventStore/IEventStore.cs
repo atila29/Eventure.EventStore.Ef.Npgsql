@@ -25,12 +25,5 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
         IEnumerable<IEvent<TEventId, TAggregateId>> GetAllEvents();
         IEnumerable<IEvent<TEventId, TAggregateId>> GetEventsByAggregateId(TAggregateId id);
         Task<int> GetAggregateVersionAsync(TAggregateId id);
-        
-        /// <summary>
-        /// Retrieve queryable of Id's from aggregate type.
-        /// </summary>
-        /// <typeparam name="TAggregate"></typeparam>
-        /// <returns></returns>
-        IQueryable<TAggregateId> IdsAsQueryable<TAggregate>();
     }
 }
