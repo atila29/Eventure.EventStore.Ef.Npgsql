@@ -44,7 +44,7 @@ namespace Eventure.EventStore.Ef.Npgsql.Test
             
             // Act
             await dispatcher.Dispatch(command);
-            var aggregate = await eventStore.GetAsync<TestAggregate>(command.AggregateId);
+            var aggregate = await eventStore.GetAggregateAsync<TestAggregate>(command.AggregateId);
 
             // Assert
             Assert.NotNull(aggregate);

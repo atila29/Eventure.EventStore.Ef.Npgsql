@@ -79,7 +79,7 @@ namespace Eventure.EventStore.Ef.Npgsql.Test
             await eventStore.AddEventAsync(creationEvent);
             await eventStore.AddEventAsync(updatedEvent);
 
-            var aggregate = await eventStore.GetAsync<TestAggregate>(aggregateId);
+            var aggregate = await eventStore.GetAggregateAsync<TestAggregate>(aggregateId);
             
             // Assert
             Assert.NotNull(eventStore);

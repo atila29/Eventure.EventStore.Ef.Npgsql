@@ -33,7 +33,7 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
             _eventDataFactory = eventDataFactory;
         }
 
-        public async Task<TAggregate> GetAsync<TAggregate>(TAggregateId id) 
+        public async Task<TAggregate> GetAggregateAsync<TAggregate>(TAggregateId id) 
             where TAggregate : IAggregateRoot<TAggregateId, TEventId>
         {
             var creater = _serviceProvider.GetAggregateFactory<TAggregate, TAggregateId, TEventId>();
@@ -69,5 +69,10 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
 
         public Task<int> GetAggregateVersionAsync(TAggregateId id) => 
             DbContext.Events.CountAsync(@event => @event.AggregateId.Equals(id));
+
+        public IQueryable<TAggregateId> IdsAsQueryable<TAggregate>() =>
+            DbContext.Events
+                .Where(data => data.Version == 0 && data.EventType == typeof(TAggregate).FullName)
+                .Select(data => data.AggregateId);
     }
 }
