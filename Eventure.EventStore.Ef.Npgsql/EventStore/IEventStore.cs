@@ -8,14 +8,14 @@ using Eventure.EventStore.Ef.Npgsql.Model;
 
 namespace Eventure.EventStore.Ef.Npgsql.EventStore
 {
-    public interface IEventStore<in TEventData> : IEventStore<TEventData, Guid, Guid> 
+    public interface IEventStore<TEventData> : IEventStore<TEventData, Guid, Guid> 
         where TEventData : IEventData<Guid, Guid>
     {
         
     }
     
     
-    public interface IEventStore<in TEventData, TEventId, TAggregateId> 
+    public interface IEventStore<TEventData, TEventId, TAggregateId> 
         where TEventData : IEventData<TEventId, TAggregateId>
         where TEventId : IComparable, IComparable<TEventId>, IEquatable<TEventId>
         where TAggregateId : IComparable, IComparable<TAggregateId>, IEquatable<TAggregateId>
@@ -24,6 +24,7 @@ namespace Eventure.EventStore.Ef.Npgsql.EventStore
         Task AddEventAsync<TEvent>(TEvent @event) where TEvent : IEvent<TEventId, TAggregateId>;
         IEnumerable<IEvent<TEventId, TAggregateId>> GetAllEvents();
         IEnumerable<IEvent<TEventId, TAggregateId>> GetEventsByAggregateId(TAggregateId id);
+        IQueryable<TEventData> GetEventsByEventType<TEvent>() where TEvent : IEvent<TEventId, TAggregateId>;
         Task<int> GetAggregateVersionAsync(TAggregateId id);
     }
 }
